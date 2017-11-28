@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:id="@+id/ddyy"
+    android:layout_width="wrap_content"
+    android:layout_marginLeft="@dimen/dp_10"
+    android:layout_marginRight="@dimen/dp_10"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/logo_bg"
+        android:src="@drawable/ruitong_logo"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_width="70dp"
+        android:layout_height="30dp" />
+
+    <ImageView
+        android:id="@+id/touxiang2"
+        android:layout_centerHorizontal="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/type"
+                android:layout_below="@+id/touxiang2"
+                android:textColor="@color/lanse33"
+                android:textSize="30sp"
+                android:layout_marginTop="80dp"
+                android:layout_centerHorizontal="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+    <TextView
+        android:id="@+id/name2"
+        android:textColor="@color/lanse33"
+        android:textSize="38sp"
+        android:layout_marginTop="16dp"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/type"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+
+</RelativeLayout>

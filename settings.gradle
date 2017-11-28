@@ -1,0 +1,1 @@
+include ':app', ':vlc-android-sdk-master'

@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:background="@drawable/bg11"
+    android:layout_height="match_parent">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_centerInParent="true"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:gravity="center_horizontal"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <Button
+                android:id="@+id/bt1"
+                android:layout_width="150dp"
+                android:layout_height="56dp"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/zidonghuoqu1"
+                android:text="设置摄像头IP"
+                android:textColor="@color/white"
+                android:textSize="16sp" />
+
+            <Button
+                android:id="@+id/bt2"
+                android:layout_marginTop="20dp"
+                android:textSize="16sp"
+                android:text="设置主机地址"
+                android:textColor="@color/lanse33"
+                android:background="@drawable/zidonghuoqu2"
+                android:layout_width="150dp"
+                android:layout_height="56dp" />
+
+            <Button
+                android:id="@+id/bt3"
+                android:textSize="16sp"
+                android:layout_marginTop="20dp"
+                android:text="设置推送地址"
+                android:textColor="@color/lanse33"
+                android:background="@drawable/zidonghuoqu2"
+                android:layout_width="150dp"
+                android:layout_height="56dp" />
+
+            <Button
+                android:id="@+id/bt4"
+                android:layout_width="150dp"
+                android:layout_height="56dp"
+                android:visibility="gone"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/zidonghuoqu2"
+                android:text="设置陌生人是否弹窗"
+                android:textColor="@color/lanse33"
+                android:textSize="16sp" />
+
+            <Button
+                android:id="@+id/bt5"
+                android:textSize="16sp"
+                android:visibility="gone"
+                android:layout_marginTop="20dp"
+                android:text="设置陌生人是否显示"
+                android:textColor="@color/lanse33"
+                android:background="@drawable/zidonghuoqu2"
+                android:layout_width="150dp"
+                android:layout_height="56dp" />
+
+            <Button
+                android:id="@+id/bt6"
+                android:layout_marginTop="20dp"
+                android:textSize="16sp"
+                android:text="设置横竖屏"
+                android:visibility="gone"
+                android:textColor="@color/lanse33"
+                android:background="@drawable/zidonghuoqu2"
+                android:layout_width="150dp"
+                android:layout_height="56dp" />
+
+            <Button
+                android:id="@+id/bt7"
+                android:layout_marginTop="20dp"
+                android:textSize="16sp"
+                android:visibility="gone"
+                android:text="选择模版"
+                android:textColor="@color/lanse33"
+                android:background="@drawable/zidonghuoqu2"
+                android:layout_width="150dp"
+                android:layout_marginBottom="20dp"
+                android:layout_height="56dp" />
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</RelativeLayout>

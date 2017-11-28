@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:background="@color/white"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_width="260dp"
+        android:layout_height="190dp">
+        <TextView
+            android:textColor="@color/lanse33"
+            android:text="温馨提示"
+            android:textSize="20sp"
+            android:gravity="center"
+            android:layout_marginTop="16dp"
+            android:id="@+id/a1"
+            android:layout_centerHorizontal="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <View
+            android:layout_below="@+id/a1"
+            android:id="@+id/a2"
+            android:background="@color/colorAccent"
+            android:layout_width="match_parent"
+            android:layout_marginTop="10dp"
+            android:layout_height="1dp"/>
+
+
+        <TextView
+            android:layout_below="@+id/a2"
+            android:id="@+id/a3"
+            android:textSize="14sp"
+            android:textColor="@color/lanse33"
+            android:gravity="center"
+            android:layout_marginTop="20dp"
+            android:layout_centerHorizontal="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_alignParentBottom="true"
+            android:layout_width="match_parent"
+            android:gravity="center_horizontal"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="16dp"
+            android:layout_height="wrap_content">
+
+            <Button
+                android:layout_width="90dp"
+                android:textColor="@color/white"
+                android:textSize="14sp"
+                android:layout_marginRight="16dp"
+                android:id="@+id/a5"
+                android:background="@drawable/jiaohu3"
+                android:text="关 闭"
+                android:gravity="center"
+                android:layout_height="34dp" />
+
+            <Button
+                android:layout_width="90dp"
+                android:textColor="@color/white"
+                android:textSize="14sp"
+                android:id="@+id/a6"
+                android:visibility="gone"
+                android:layout_marginLeft="16dp"
+                android:background="@drawable/jiaohu3"
+                android:text="返回首页"
+                android:gravity="center"
+                android:layout_height="34dp" />
+
+        </LinearLayout>
+
+
+    </RelativeLayout>
+
+</LinearLayout>

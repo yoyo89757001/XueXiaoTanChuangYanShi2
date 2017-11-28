@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="background_gradient_start">#000000</color>
+    <color name="background_gradient_end">#DDDDDD</color>
+    <color name="fastlane_background">#0096a6</color>
+    <color name="search_opaque">#ffaa3f</color>
+    <color name="selected_background">#ffaa3f</color>
+    <color name="detail_background">#0096a6</color>
+    <color name="soft_opaque">#30000000</color>
+    <color name="img_soft_opaque">#30FF0000</color>
+    <color name="img_full_opaque">#00000000</color>
+    <color name="black_opaque">#AA000000</color>
+    <color name="black">#000000</color>
+    <color name="white">#FFFFFF</color>
+    <color name="orange_transparent">#AAFADCA7</color>
+    <color name="yellow">#EEFF41</color>
+    <color name="red">#e70707</color>
+    <color name="default_background">#3d3d3d</color>
+    <color name="default_background2">#06f5de</color>
+    <color name="a3">#00002F</color>
+    <color name="a33">#cc00002F</color>
+    <color name="huise22">#aa6F071B</color>
+    <color name="red2">#cf0b0e</color>
+    <color name="lanse">#D20011</color>
+    <color name="lanse22">#380000</color>
+    <color name="lanse33">#1b37d6</color>
+    <color name="caolv">#039C6E</color>
+    <color name="img_soft_opaque2">#30FFFFFF</color>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+    <color name="dialog_text">#333333</color>
+    <color name="vod_category_text_color_normal">#f6773c</color>
+    <color name="orange">#f97f46</color>
+    <color name="common_white">#ffffff</color>
+    <color name="bg_color">#EDEDED</color>
+    <color name="contents_text">#ff000000</color>
+    <color name="encode_view">#ffffffff</color>
+    <color name="help_button_view">#ffcccccc</color>
+    <color name="help_view">#ff404040</color>
+    <color name="possible_result_points">#c0ffff00</color>
+    <color name="result_image_border">#ffffffff</color>
+    <color name="result_minor_text">#ffc0c0c0</color>
+    <color name="result_points">#c000ff00</color>
+    <color name="result_text">#ffffffff</color>
+    <color name="result_view">#b0000000</color>
+    <color name="sbc_header_text">#ff808080</color>
+    <color name="sbc_header_view">#ffffffff</color>
+    <color name="sbc_list_item">#fffff0e0</color>
+    <color name="sbc_layout_view">#ffffffff</color>
+    <color name="sbc_page_number_text">#ff000000</color>
+    <color name="sbc_snippet_text">#ff4b4b4b</color>
+    <color name="share_text">#ff000000</color>
+    <color name="share_view">#ffffffff</color>
+    <color name="status_view">#50000000</color>
+    <color name="status_text">#ffffffff</color>
+    <color name="transparent">#00000000</color>
+    <color name="viewfinder_frame">#ff000000</color>
+    <color name="viewfinder_laser">#ffff0000</color>
+    <color name="viewfinder_mask">#60000000</color>
+    <color name="header">#58567D</color>
+    <color name="grgray">#686868</color>
+
+    <color name="huang">#FBF422</color>
+
+    <color name="colorBar_bg">#FF1c97fe</color>
+    <color name="tabtextcolo">#b7868686</color>
+    <color name="write">#ffffffff</color>
+    <color name="blake">#ff111111</color>
+    <color name="blake2">#4e4e4e</color>
+    <color name="control_background">#cc4285f4</color>
+    <color name="testdi">#4f050505</color>
+    <color name="textcolor">#8c050505</color>
+    <color name="statusbar_bg">#1c97fe</color>
+    <color name="statusbar_bg3">#2a5ee2</color>
+
+
+    <color name="semi_transparent">#22ffffff</color><!-- 半透明 -->
+
+    <color name="igray">#ffF2F2F2</color><!-- 用于页面背景 -->
+    <color name="igray2">#ffF2F2F2</color><!-- 用于页面背景 -->
+    <color name="darkblue">#ff7CA0CE</color><!-- actionbar背景 ,即是所有标题栏背景 主题色 -->
+
+
+    <color name="blue">#ff0288ce</color><!-- 红色 -->
+    <color name="igray_et">#ff999999</color><!-- 辅助文字-->
+    <color name="Orange">#F5A100</color><!-- 橙色 -->
+    <color name="dark_grey">#D2D2D2</color><!-- 深灰 -->
+    <color name="wxnavpage">#FFE1E8EB</color>
+    <color name="heise">#333333</color>
+    <color name="heise2">#e0333333</color>
+
+    <color name="heise3">#38000000</color>
+    <color name="red222">#ce0101</color>
+    <color name="hong333">#F43103</color>
+    <color name="heise5">#9b000000</color>
+</resources>

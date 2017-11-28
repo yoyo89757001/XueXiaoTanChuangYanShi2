@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/top_rl_mo"
+    android:background="@drawable/zidonghuoqu1"
+    android:focusable="true"
+    android:layout_gravity="center">
+
+  <ImageView
+      android:scaleType="fitXY"
+      android:layout_margin="10dp"
+      android:id="@+id/imageView_moban"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent" />
+
+  <TextView
+      android:textColor="@color/white"
+      android:textSize="20sp"
+      android:id="@+id/moban"
+      android:layout_marginLeft="@dimen/dp_10"
+      android:layout_marginTop="6dp"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content" />
+
+</RelativeLayout>
+
