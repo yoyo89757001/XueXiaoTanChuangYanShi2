@@ -530,11 +530,49 @@ public class VlcVideoActivity extends BaseActivity implements RecytviewCash, Spe
 	}
 
 	private void chongzhi(){
-		yuangongList.clear();
+		//yuangongList.clear();
 		//tanchuangList.clear();
-		if (recyclerView.getScrollState() == RecyclerView.SCROLL_STATE_IDLE || (!recyclerView.isComputingLayout())) {
-			adapter.notifyDataSetChanged();
-		}
+		new Thread(new Runnable() {
+			@Override
+			public void run() {
+				try {
+					Thread.sleep(600);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+				runOnUiThread(new Runnable() {
+					@Override
+					public void run() {
+						yuangongList.clear();
+						lingdaoList.clear();
+
+						TanChuangBean bean=new TanChuangBean();
+						bean.setBytes(null);
+						bean.setName(null);
+						bean.setType(-2);
+						bean.setRemark("学生");
+						bean.setIdid(0);
+						bean.setTouxiang(null);
+						yuangongList.add(bean);
+
+						TanChuangBean bean2=new TanChuangBean();
+						bean2.setBytes(null);
+						bean2.setName(null);
+						bean2.setType(-2);
+						bean.setIdid(0);
+						bean.setRemark("领导");
+						bean2.setTouxiang(null);
+						lingdaoList.add(bean2);
+
+						if (recyclerView.getScrollState() == RecyclerView.SCROLL_STATE_IDLE || (!recyclerView.isComputingLayout())) {
+							adapter.notifyDataSetChanged();
+						}
+					}
+				});
+
+			}
+		}).start();
+
 
 
 //
@@ -886,12 +924,10 @@ public class VlcVideoActivity extends BaseActivity implements RecytviewCash, Spe
 //		});
 
 
-		manager = new WrapContentLinearLayoutManager(this);
-		manager.setOrientation(LinearLayoutManager.VERTICAL);
+		manager = new WrapContentLinearLayoutManager(VlcVideoActivity.this,LinearLayoutManager.HORIZONTAL,false,this);
 		recyclerView.setLayoutManager(manager);
 
-		manager2 = new WrapContentLinearLayoutManager(this);
-		manager2.setOrientation(LinearLayoutManager.VERTICAL);
+		manager2 = new WrapContentLinearLayoutManager(VlcVideoActivity.this,LinearLayoutManager.VERTICAL,false,this);
 		recyclerView2.setLayoutManager(manager2);
 		//recyclerView.addItemDecoration(new RecycleViewDivider(VlcVideoActivity.this, LinearLayoutManager.VERTICAL));
 		//recyclerView.addItemDecoration(new MyDecoration(VlcVideoActivity.this, LinearLayoutManager.VERTICAL,20,R.color.transparent));
@@ -1068,6 +1104,7 @@ public class VlcVideoActivity extends BaseActivity implements RecytviewCash, Spe
 			if (helper.getAdapterPosition()==0 ){
 				rl.setBackgroundColor(Color.parseColor("#00000000"));
 				toprl.setBackgroundColor(Color.parseColor("#00000000"));
+				imageView.setImageBitmap(null);
 				name.setText("");
 				zhuangtai.setText("");
 			}else {
@@ -1147,8 +1184,8 @@ public class VlcVideoActivity extends BaseActivity implements RecytviewCash, Spe
 
 			    //弹窗的高宽
 
-				lp.width=dw;
-				lp.height=(dh/3)-40;
+				lp.width=dw/3;
+				lp.height=(dh/4)+60;
 				linearLayout_tanchuang.setLayoutParams(lp);
 			    linearLayout_tanchuang.invalidate();
 
@@ -1202,7 +1239,7 @@ public class VlcVideoActivity extends BaseActivity implements RecytviewCash, Spe
 //					.start();
 
 			RelativeLayout toprl= helper.getView(R.id.ffflll);
-
+			ImageView imageView=helper.getView(R.id.touxiang);
 			TextView tishi_tv= helper.getView(R.id.tishi_tv);
 			TextView tishi_tv2= helper.getView(R.id.ddd);
 
@@ -1210,6 +1247,7 @@ public class VlcVideoActivity extends BaseActivity implements RecytviewCash, Spe
 				toprl.setBackgroundColor(Color.parseColor("#00000000"));
 				tishi_tv.setText("");
 				tishi_tv2.setText("");
+				imageView.setImageBitmap(null);
 
 			}else {
 
@@ -1606,7 +1644,6 @@ public class VlcVideoActivity extends BaseActivity implements RecytviewCash, Spe
 		baoCunBean=baoCunBeanDao.load(123456L);
 
 		if (baoCunBean!=null && baoCunBean.getZhujiDiZhi()!=null){
-			Log.d(TAG, "onResume");
 			try {
 				String[] a1=baoCunBean.getZhujiDiZhi().split("//");
 				String[] b1=a1[1].split(":");

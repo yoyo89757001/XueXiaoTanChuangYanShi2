@@ -15,6 +15,7 @@ public class WrapContentLinearLayoutManager extends LinearLayoutManager {
     private RecytviewCash recytviewCash;
     public WrapContentLinearLayoutManager(Context context) {
         super(context);
+        this.recytviewCash=recytviewCash;
     }
 
     public WrapContentLinearLayoutManager(Context context, int orientation, boolean reverseLayout,RecytviewCash recytviewCash) {
