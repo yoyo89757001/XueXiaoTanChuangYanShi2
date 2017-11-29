@@ -10,6 +10,15 @@ public class TanChuangBean {
     private String remark;
     private byte[] bytes;
     private int type;
+    private long idid;
+
+    public long getIdid() {
+        return idid;
+    }
+
+    public void setIdid(long idid) {
+        this.idid = idid;
+    }
 
     public String getRemark() {
         return remark;

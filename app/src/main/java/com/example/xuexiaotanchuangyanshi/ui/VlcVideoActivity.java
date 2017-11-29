@@ -8,6 +8,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.graphics.Color;
 import android.net.ConnectivityManager;
 import android.net.Network;
 import android.net.NetworkInfo;
@@ -179,55 +180,49 @@ public class VlcVideoActivity extends BaseActivity implements RecytviewCash, Spe
 
 					break;
 				case 110:
-//					Log.d(TAG, "dddd111");
-//					ijkVideoView.setVisibility(View.VISIBLE);
-//					//播放广告视频
-//					if (voidePathList.size()!=0)
-//						play(voidePathList.get(0));
-//
-////					if (photoPathList.size()!=0){
-////						rollPagerView.setAdapter(new TestLoopAdapter(rollPagerView));
-////						rollPagerView.setHintView(null);
-////
-////					}
-
-					//员工弹窗消失
-					if (yuangongList.size()>1) {
-						yuangongList.remove(1);
-
-//						adapter2.notifyItemRemoved(1);
-//						//adapter.notifyItemChanged(1);
-//						//adapter.notifyItemRangeChanged(1,tanchuangList.size());
-//						//adapter.notifyDataSetChanged();
-//						manager2.scrollToPosition(yuangongList.size() - 1);
-//						//Log.d(TAG, "tanchuangList.size():" + tanchuangList.size());
-
-					}
-
-					break;
-				case 999:
-					Log.d(TAG, "222");
-					if (yuangongList.size()>0) {
+					if (lingdaoList.size()>1) {
 
 						AnimatorSet animatorSet = new AnimatorSet();
 						animatorSet.playTogether(
-								ObjectAnimator.ofFloat(adapter.getViewByPosition(recyclerView,0,R.id.ffflll),"scaleY",1f,0f),
-								ObjectAnimator.ofFloat(adapter.getViewByPosition(recyclerView,0,R.id.ffflll),"scaleX",1f,0f)
+								ObjectAnimator.ofFloat(adapter2.getViewByPosition(recyclerView2,1,R.id.ffflll),"scaleY",1f,0f),
+								ObjectAnimator.ofFloat(adapter2.getViewByPosition(recyclerView2,1,R.id.ffflll),"scaleX",1f,0f)
 								//	ObjectAnimator.ofFloat(helper.itemView,"alpha",0f,1f)
 						);
 						animatorSet.setDuration(200);
 						animatorSet.setInterpolator(new AccelerateInterpolator());
 						animatorSet.addListener(new AnimatorListenerAdapter(){
 							@Override public void onAnimationEnd(Animator animation) {
-								adapter.notifyItemRemoved(0);
-								yuangongList.remove(0);
-
+								adapter2.notifyItemRemoved(1);
+								lingdaoList.remove(1);
 
 							}
 						});
 						animatorSet.start();
 
+					}
 
+
+					break;
+				case 999:
+
+					if (yuangongList.size()>1) {
+
+						AnimatorSet animatorSet = new AnimatorSet();
+						animatorSet.playTogether(
+								ObjectAnimator.ofFloat(adapter.getViewByPosition(recyclerView,1,R.id.ffflll),"scaleY",1f,0f),
+								ObjectAnimator.ofFloat(adapter.getViewByPosition(recyclerView,1,R.id.ffflll),"scaleX",1f,0f)
+								//	ObjectAnimator.ofFloat(helper.itemView,"alpha",0f,1f)
+						);
+						animatorSet.setDuration(200);
+						animatorSet.setInterpolator(new AccelerateInterpolator());
+						animatorSet.addListener(new AnimatorListenerAdapter(){
+							@Override public void onAnimationEnd(Animator animation) {
+								adapter.notifyItemRemoved(1);
+								yuangongList.remove(1);
+
+							}
+						});
+						animatorSet.start();
 
 						//adapter.notifyItemChanged(0);
 					//	adapter.notifyItemRangeChanged(0,yuangongList.size()+1);
@@ -250,95 +245,143 @@ public class VlcVideoActivity extends BaseActivity implements RecytviewCash, Spe
 
 			if (msg.arg1==1){
 				ShiBieBean.PersonBeanSB dataBean= (ShiBieBean.PersonBeanSB) msg.obj;
-				Log.d(TAG, "333");
 				try {
 
 					final TanChuangBean bean=new TanChuangBean();
 					bean.setBytes(null);
+					bean.setIdid(dataBean.getId());
 					bean.setType(dataBean.getSubject_type());
 					bean.setName(dataBean.getName());
 					bean.setRemark(dataBean.getRemark());
 					bean.setTouxiang(dataBean.getAvatar());
 
-					switch (dataBean.getSubject_type()){
+					switch (dataBean.getSubject_type()) {
 						case 0: //员工
 							//Log.d(TAG, "员工k");
-							yuangongList.add(bean);
-							int i1=yuangongList.size();
-							adapter.notifyItemInserted(i1);
-							manager.scrollToPosition(i1-1);
-							new Thread(new Runnable() {
-								@Override
-								public void run() {
 
-									try {
-										Thread.sleep(10000);
-
-										Message message=Message.obtain();
-										message.what=999;
-										handler.sendMessage(message);
-
-
-									} catch (InterruptedException e) {
-										e.printStackTrace();
+							if (dataBean.getRemark().equals("领导")) {
+								int a = 0;
+								for (int i2 = 0; i2 < lingdaoList.size(); i2++) {
+									if (lingdaoList.get(i2).getIdid() == bean.getIdid()) {
+										a = 1;
 									}
+								}
+								if (a==0){
 
+								lingdaoList.add(bean);
+								int i1 = lingdaoList.size();
+								adapter2.notifyItemInserted(i1);
+								manager2.scrollToPosition(i1 - 1);
+								new Thread(new Runnable() {
+									@Override
+									public void run() {
+
+										try {
+											Thread.sleep(10000);
+
+											Message message = Message.obtain();
+											message.what = 110;
+											handler.sendMessage(message);
+
+
+										} catch (InterruptedException e) {
+											e.printStackTrace();
+										}
+
+
+									}
+								}).start();
 
 								}
-							}).start();
 
-							break;
-						case 1: //普通访客
-							yuangongList.add(bean);
-							int i2=yuangongList.size();
-							adapter.notifyItemInserted(i2);
-							manager.scrollToPosition(i2-1);
-							new Thread(new Runnable() {
-								@Override
-								public void run() {
-
-									try {
-										Thread.sleep(10000);
-
-										Message message=Message.obtain();
-										message.what=999;
-										handler.sendMessage(message);
-
-									} catch (InterruptedException e) {
-										e.printStackTrace();
+							}else {
+								int a = 0;
+								for (int i2 = 0; i2 < yuangongList.size(); i2++) {
+									if (yuangongList.get(i2).getIdid() == bean.getIdid()) {
+										a = 1;
 									}
-
-
 								}
-							}).start();
+								if (a==0){
+									yuangongList.add(bean);
+									int i1 = yuangongList.size();
+									adapter.notifyItemInserted(i1);
+									manager.scrollToPosition(i1 - 1);
+									new Thread(new Runnable() {
+										@Override
+										public void run() {
 
-							break;
-						case 2:  //VIP访客
-							yuangongList.add(bean);
-							int i3=yuangongList.size();
-							adapter.notifyItemInserted(i3);
-							manager.scrollToPosition(i3-1);
+											try {
+												Thread.sleep(10000);
 
-							new Thread(new Runnable() {
-								@Override
-								public void run() {
-
-									try {
-										Thread.sleep(10000);
-										Message message=Message.obtain();
-										message.what=999;
-										handler.sendMessage(message);
-
-									} catch (InterruptedException e) {
-										e.printStackTrace();
-									}
+												Message message = Message.obtain();
+												message.what = 999;
+												handler.sendMessage(message);
 
 
+											} catch (InterruptedException e) {
+												e.printStackTrace();
+											}
+
+
+										}
+									}).start();
 								}
-							}).start();
 
 
+					}
 							break;
+
+//						case 1: //普通访客
+//							yuangongList.add(bean);
+//							int i2=yuangongList.size();
+//							adapter.notifyItemInserted(i2);
+//							manager.scrollToPosition(i2-1);
+//							new Thread(new Runnable() {
+//								@Override
+//								public void run() {
+//
+//									try {
+//										Thread.sleep(10000);
+//
+//										Message message=Message.obtain();
+//										message.what=999;
+//										handler.sendMessage(message);
+//
+//									} catch (InterruptedException e) {
+//										e.printStackTrace();
+//									}
+//
+//
+//								}
+//							}).start();
+//
+//							break;
+//						case 2:  //VIP访客
+//							yuangongList.add(bean);
+//							int i3=yuangongList.size();
+//							adapter.notifyItemInserted(i3);
+//							manager.scrollToPosition(i3-1);
+//
+//							new Thread(new Runnable() {
+//								@Override
+//								public void run() {
+//
+//									try {
+//										Thread.sleep(10000);
+//										Message message=Message.obtain();
+//										message.what=999;
+//										handler.sendMessage(message);
+//
+//									} catch (InterruptedException e) {
+//										e.printStackTrace();
+//									}
+//
+//
+//								}
+//							}).start();
+//
+//
+//							break;
 
 					}
 
@@ -664,26 +707,25 @@ public class VlcVideoActivity extends BaseActivity implements RecytviewCash, Spe
 		lingdaoList=new Vector<>();
 		yuangongList = new Vector<>();
 
-//		TanChuangBean bean=new TanChuangBean();
-//		bean.setBytes(null);
-//		bean.setName(null);
-//		bean.setType(-2);
-//		bean.setTouxiang(null);
-//		tanchuangList.add(bean);
-//
-//		TanChuangBean bean2=new TanChuangBean();
-//		bean2.setBytes(null);
-//		bean2.setName(null);
-//		bean2.setType(-2);
-//		bean2.setTouxiang(null);
-//		tanchuangList.add(bean2);
-//
-//		TanChuangBean bean3=new TanChuangBean();
-//		bean3.setBytes(null);
-//		bean3.setName(null);
-//		bean3.setType(-2);
-//		bean3.setTouxiang(null);
-//		yuangongList.add(bean3);
+		TanChuangBean bean=new TanChuangBean();
+		bean.setBytes(null);
+		bean.setName(null);
+		bean.setType(-2);
+		bean.setRemark("学生");
+		bean.setIdid(0);
+		bean.setTouxiang(null);
+		yuangongList.add(bean);
+
+		TanChuangBean bean2=new TanChuangBean();
+		bean2.setBytes(null);
+		bean2.setName(null);
+		bean2.setType(-2);
+		bean.setIdid(0);
+		bean.setRemark("领导");
+		bean2.setTouxiang(null);
+		lingdaoList.add(bean2);
+
+
 
 
 		Button button = (Button) findViewById(R.id.dddk);
@@ -807,41 +849,41 @@ public class VlcVideoActivity extends BaseActivity implements RecytviewCash, Spe
 		ijkMediaPlayer.setOption(IjkMediaPlayer.OPT_CATEGORY_FORMAT, "probsize", "4096");
 		ijkMediaPlayer.setOption(IjkMediaPlayer.OPT_CATEGORY_FORMAT, "analyzeduration", "2000000");
 
-		ijkVideoView.setVideoPath(Environment.getExternalStorageDirectory()+File.separator+"aaa.mp4");
-		ijkVideoView.setOnCompletionListener(new IMediaPlayer.OnCompletionListener() {
-			@Override
-			public void onCompletion(IMediaPlayer iMediaPlayer) {
-
-				ijkVideoView.setVideoPath(Environment.getExternalStorageDirectory()+File.separator+"aaa.mp4");
-				ijkVideoView.setOnPreparedListener(new IMediaPlayer.OnPreparedListener() {
-					@Override
-					public void onPrepared(IMediaPlayer iMediaPlayer) {
-						ijkVideoView.start();
-					}
-				});
-
-			}
-		});
-		ijkVideoView.setOnPreparedListener(new IMediaPlayer.OnPreparedListener() {
-			@Override
-			public void onPrepared(IMediaPlayer iMediaPlayer) {
-				ijkVideoView.start();
-			}
-		});
-		ijkVideoView.setOnErrorListener(new IMediaPlayer.OnErrorListener() {
-			@Override
-			public boolean onError(IMediaPlayer iMediaPlayer, int i, int i1) {
-				//Log.d(TAG, "i:" + i);
-				//Log.d(TAG, "i1:" + i1);
-				Toast toast=TastyToast.makeText(VlcVideoActivity.this,"播放视频出错",TastyToast.LENGTH_LONG,TastyToast.ERROR);
-				toast.setGravity(Gravity.CENTER,0,0);
-				toast.show();
-
-
-
-				return true;
-			}
-		});
+//		ijkVideoView.setVideoPath(Environment.getExternalStorageDirectory()+File.separator+"aaa.mp4");
+//		ijkVideoView.setOnCompletionListener(new IMediaPlayer.OnCompletionListener() {
+//			@Override
+//			public void onCompletion(IMediaPlayer iMediaPlayer) {
+//
+//				ijkVideoView.setVideoPath(Environment.getExternalStorageDirectory()+File.separator+"aaa.mp4");
+//				ijkVideoView.setOnPreparedListener(new IMediaPlayer.OnPreparedListener() {
+//					@Override
+//					public void onPrepared(IMediaPlayer iMediaPlayer) {
+//						ijkVideoView.start();
+//					}
+//				});
+//
+//			}
+//		});
+//		ijkVideoView.setOnPreparedListener(new IMediaPlayer.OnPreparedListener() {
+//			@Override
+//			public void onPrepared(IMediaPlayer iMediaPlayer) {
+//				ijkVideoView.start();
+//			}
+//		});
+//		ijkVideoView.setOnErrorListener(new IMediaPlayer.OnErrorListener() {
+//			@Override
+//			public boolean onError(IMediaPlayer iMediaPlayer, int i, int i1) {
+//				//Log.d(TAG, "i:" + i);
+//				//Log.d(TAG, "i1:" + i1);
+//				Toast toast=TastyToast.makeText(VlcVideoActivity.this,"播放视频出错",TastyToast.LENGTH_LONG,TastyToast.ERROR);
+//				toast.setGravity(Gravity.CENTER,0,0);
+//				toast.show();
+//
+//
+//
+//				return true;
+//			}
+//		});
 
 
 		manager = new WrapContentLinearLayoutManager(this);
@@ -857,7 +899,7 @@ public class VlcVideoActivity extends BaseActivity implements RecytviewCash, Spe
 		adapter = new MyAdapter(R.layout.tanchuang_item, yuangongList);
 		recyclerView.setAdapter(adapter);
 
-		adapter2 = new MyAdapter2(R.layout.tanchuang_item, lingdaoList);
+		adapter2 = new MyAdapter2(R.layout.tanchuang_item2, lingdaoList);
 		recyclerView2.setAdapter(adapter2);
 
 		surfaceview.setKeepScreenOn(true);
@@ -1021,14 +1063,19 @@ public class VlcVideoActivity extends BaseActivity implements RecytviewCash, Spe
 			TextView name=helper.getView(R.id.name33);
 			TextView zhuangtai=helper.getView(R.id.zhuangtai33);
 			LinearLayout toprl=helper.getView(R.id.ggghhh);
-			//TextView autoScrollTextView=helper.getView(R.id.richeng);
-			//Log.d("VlcVi", "item.getType():" + item.getType());
+			RelativeLayout rl=helper.getView(R.id.ffflll);
 
+			if (helper.getAdapterPosition()==0 ){
+				rl.setBackgroundColor(Color.parseColor("#00000000"));
+				toprl.setBackgroundColor(Color.parseColor("#00000000"));
+				name.setText("");
+				zhuangtai.setText("");
+			}else {
 
 				switch (item.getType()) {
 					case -1:
 						//陌生人
-							toprl.setBackgroundResource(R.drawable.zidonghuoqu8);
+						toprl.setBackgroundResource(R.drawable.zidonghuoqu8);
 
 						zhuangtai.setText("陌生人");
 						name.setText("陌生人进入,请保安尽快到现场或短信保安预警.");
@@ -1038,9 +1085,9 @@ public class VlcVideoActivity extends BaseActivity implements RecytviewCash, Spe
 						break;
 					case 0:
 						//员工
-					 toprl.setBackgroundResource(R.drawable.yg_bg);
-					 name.setText(item.getName());
-					 zhuangtai.setText("学生");
+						toprl.setBackgroundResource(R.drawable.yg_bg);
+						name.setText(item.getName());
+						zhuangtai.setText(item.getRemark());
 						mSpeechSynthesizer.speak("欢迎"+item.getName()+"祝你出入平安.");
 
 //						String  zt=item.getRemark();
@@ -1074,30 +1121,26 @@ public class VlcVideoActivity extends BaseActivity implements RecytviewCash, Spe
 
 						break;
 				}
+				if (item.getTouxiang()!=null){
 
+					Glide.with(MyApplication.getAppContext())
+							.load(zhuji+item.getTouxiang())
+							//	.load("http://121.46.3.20/"+item.getTouxiang())
+							.apply(RequestOptions.bitmapTransform(new CircleCrop()))
+							//.transform(new GlideCircleTransform(MyApplication.getAppContext(),2,Color.parseColor("#ffffffff")))
+							//.transform(new GlideRoundTransform(MyApplication.getAppContext(), 6))
+							.into((ImageView) helper.getView(R.id.touxiang));
+				}else {
+					Glide.with(MyApplication.getAppContext())
+							.load(item.getBytes())
+							.apply(myOptions)
+							//.transform(new GlideCircleTransform(MyApplication.getAppContext(),2,Color.parseColor("#ffffffff")))
+							//	.transform(new GlideRoundTransform(MyApplication.getAppContext(), 6))
+							.into((ImageView) helper.getView(R.id.touxiang));
 
-
-
-			if (item.getTouxiang()!=null){
-
-				Glide.with(MyApplication.getAppContext())
-						.load(zhuji+item.getTouxiang())
-					//	.load("http://121.46.3.20/"+item.getTouxiang())
-						.apply(RequestOptions.bitmapTransform(new CircleCrop()))
-						//.transform(new GlideCircleTransform(MyApplication.getAppContext(),2,Color.parseColor("#ffffffff")))
-						//.transform(new GlideRoundTransform(MyApplication.getAppContext(), 6))
-						.into((ImageView) helper.getView(R.id.touxiang));
-			}else {
-				Glide.with(MyApplication.getAppContext())
-						.load(item.getBytes())
-						.apply(myOptions)
-
-						//.transform(new GlideCircleTransform(MyApplication.getAppContext(),2,Color.parseColor("#ffffffff")))
-					//	.transform(new GlideRoundTransform(MyApplication.getAppContext(), 6))
-						.into((ImageView) helper.getView(R.id.touxiang));
+				}
 
 			}
-
 
 			RelativeLayout linearLayout_tanchuang = helper.getView(R.id.ffflll);
 				ViewGroup.LayoutParams lp =  linearLayout_tanchuang.getLayoutParams();
@@ -1116,100 +1159,133 @@ public class VlcVideoActivity extends BaseActivity implements RecytviewCash, Spe
 
 	//领导
 	private  class MyAdapter2 extends BaseQuickAdapter<TanChuangBean,BaseViewHolder> {
-	//	private RequestOptions requestOptions = RequestOptions.circleCropTransform();
+		private RequestOptions myOptions = null;
 
 		private MyAdapter2(int layoutResId, List<TanChuangBean> data) {
 			super(layoutResId, data);
-
+			myOptions = new RequestOptions();
 		}
 
 
 		@Override
-		protected void convert(BaseViewHolder helper, TanChuangBean item) {
-			Log.d(TAG, "2动画执行");
-			ViewAnimator
-					.animate(helper.itemView)
-					.scale(0,1)
-//					.alpha(0,1)
-					.duration(1000)
-					.start();
-			ImageView imageView= helper.getView(R.id.touxiang2);
-			ImageView logo= helper.getView(R.id.logo_bg);
-			TextView type= helper.getView(R.id.type);
-			TextView name2= helper.getView(R.id.name2);
-			RelativeLayout linearLayout_tanchuang = helper.getView(R.id.ddyy);
+		protected void convert(final BaseViewHolder helper, TanChuangBean item) {
+			AnimatorSet animatorSet = new AnimatorSet();
+			animatorSet.playTogether(
+					ObjectAnimator.ofFloat(helper.itemView,"scaleY",0f,1f),
+					ObjectAnimator.ofFloat(helper.itemView,"scaleX",0f,0f)
+					//	ObjectAnimator.ofFloat(helper.itemView,"alpha",0f,1f)
+			);
+			animatorSet.setDuration(200);
+			animatorSet.setInterpolator(new AccelerateInterpolator());
+			animatorSet.addListener(new AnimatorListenerAdapter(){
+				@Override public void onAnimationEnd(Animator animation) {
 
-			if (helper.getLayoutPosition()==0){
-				linearLayout_tanchuang.setBackground(null);
-				imageView.setImageBitmap(null);
-				logo.setImageBitmap(null);
-				type.setText("");
-				name2.setText("");
+					AnimatorSet animatorSet2 = new AnimatorSet();
+					animatorSet2.playTogether(
+							ObjectAnimator.ofFloat(helper.itemView,"scaleX",0f,1f)
+							//ObjectAnimator.ofFloat(helper.itemView,"alpha",0f,1f)
+							//	ObjectAnimator.ofFloat(helper.itemView,"scaleY",1f,0.5f,1f)
+					);
+					animatorSet2.setInterpolator(new AccelerateInterpolator());
+					animatorSet2.setDuration(500);
+					animatorSet2.start();
+
+				}
+			});
+			animatorSet.start();
+
+//			ViewAnimator
+//					.animate(helper.itemView)
+//				//	.scale(0,1)
+//					.alpha(0,1)
+//					.duration(1000)
+//					.start();
+
+			RelativeLayout toprl= helper.getView(R.id.ffflll);
+
+			TextView tishi_tv= helper.getView(R.id.tishi_tv);
+			TextView tishi_tv2= helper.getView(R.id.ddd);
+
+			if (helper.getAdapterPosition()==0 ){
+				toprl.setBackgroundColor(Color.parseColor("#00000000"));
+				tishi_tv.setText("");
+				tishi_tv2.setText("");
 
 			}else {
+
 				switch (item.getType()){
 					case -1:
 						//陌生人
-						linearLayout_tanchuang.setBackgroundResource(R.drawable.ms_bg);
-						logo.setImageResource(R.drawable.ruitong_logo);
-						type.setText("陌生人");
-						name2.setText("");
+						//	toprl.setBackgroundResource(R.drawable.tanchuang);
+
 
 						break;
 					case 0:
 						//员工
-						linearLayout_tanchuang.setBackgroundResource(R.drawable.yg_bg);
-						logo.setImageResource(R.drawable.ruitong_logo);
-						type.setText("员工");
-						name2.setText(item.getName());
-
+						toprl.setBackgroundResource(R.drawable.datc);
+						String sa1="热烈欢迎"+item.getName()+"莅临参观指导";
+						StringBuilder sb1=new StringBuilder();
+						for(int i=0;i<sa1.length();i++){
+							sb1.append((sa1.charAt(i)));//依次加入sb中
+							if((i+1)%(8)==0 &&((i+1)!=sa1.length())){
+								sb1.append("\n");
+							}
+						}
+						tishi_tv.setText(sb1.toString());
+						mSpeechSynthesizer.speak(sb1.toString());
 						break;
 
 					case 1:
 						//访客
-						linearLayout_tanchuang.setBackgroundResource(R.drawable.yg_bg);
-						logo.setImageResource(R.drawable.ruitong_logo);
-						type.setText("访客");
-						name2.setText(item.getName());
+
+						toprl.setBackgroundResource(R.drawable.datc);
+						String sa="热烈欢迎"+item.getName()+"莅临参观指导";
+						StringBuilder sb=new StringBuilder();
+						for(int i=0;i<sa.length();i++){
+							sb.append((sa.charAt(i)));//依次加入sb中
+							if((i+1)%(8)==0 &&((i+1)!=sa.length())){
+								sb.append("\n");
+							}
+						}
+						tishi_tv.setText(sb.toString());
+
+						break;
+					case 2:
+						//VIP访客
+						toprl.setBackgroundResource(R.drawable.datc);
+						String sa2="热烈欢迎"+item.getName()+"莅临参观指导";
+						StringBuilder sb2=new StringBuilder();
+						for(int i=0;i<sa2.length();i++){
+							sb2.append((sa2.charAt(i)));//依次加入sb中
+							if((i+1)%(8)==0 &&((i+1)!=sa2.length())){
+								sb2.append("\n");
+							}
+						}
+						tishi_tv.setText(sb2.toString());
+
 						break;
 
 				}
-
-
 				if (item.getTouxiang()!=null){
 
 					Glide.with(MyApplication.getAppContext())
 							.load(zhuji+item.getTouxiang())
-							.apply(RequestOptions.bitmapTransform(new CircleCrop()))
-						//	.transform(new GlideCircleTransform(MyApplication.getAppContext(),2,Color.parseColor("#ffffffff")))
+							.apply(myOptions)
+							//.transform(new GlideCircleTransform(MyApplication.getAppContext(),2,Color.parseColor("#ffffffff")))
 							//.transform(new GlideRoundTransform(MyApplication.getAppContext(), 6))
-							.into(imageView);
+							.into((ImageView) helper.getView(R.id.touxiang));
 				}else {
 					Glide.with(MyApplication.getAppContext())
 							.load(item.getBytes())
-							.apply(RequestOptions.bitmapTransform(new CircleCrop()))
+							.apply(myOptions)
 							//.transform(new GlideCircleTransform(MyApplication.getAppContext(),2,Color.parseColor("#ffffffff")))
 							//.transform(new GlideRoundTransform(MyApplication.getAppContext(), 6))
-							.into(imageView);
+							.into((ImageView) helper.getView(R.id.touxiang));
 				}
 			}
 
 
-			ViewGroup.LayoutParams lp =  linearLayout_tanchuang.getLayoutParams();
-			RelativeLayout.LayoutParams touxiang_im= (RelativeLayout.LayoutParams) imageView.getLayoutParams();
-			//员工头像大小
-			touxiang_im.width=dh/5+50;
-			touxiang_im.height=dh/5+50;
-			touxiang_im.topMargin=(dh)/5-40;
-			imageView.setLayoutParams(touxiang_im);
-			imageView.invalidate();
-			//弹窗宽度
-			lp.width=dw/3-30;
-			//lp.height=dh/3;
-			linearLayout_tanchuang.setLayoutParams(lp);
-			linearLayout_tanchuang.invalidate();
-
-			}
+		}
 
 	}
 

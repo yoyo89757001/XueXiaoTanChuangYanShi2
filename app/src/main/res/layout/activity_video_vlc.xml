@@ -48,7 +48,7 @@
 
                     <TextView
                         android:id="@+id/wendu"
-                        android:text="32度"
+                        android:text="22度"
                         android:layout_marginLeft="5dp"
                         android:layout_marginTop="16dp"
                         android:textSize="28sp"
