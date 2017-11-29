@@ -17,7 +17,6 @@
         android:layout_height="match_parent">
         <ImageView
             android:id="@+id/touxiang"
-            android:layout_marginTop="-10dp"
             android:layout_width="180dp"
             android:layout_height="180dp"
             android:scaleType="fitXY" />
@@ -25,7 +24,7 @@
         <TextView
             android:textSize="28sp"
             android:id="@+id/zhuangtai33"
-            android:layout_marginTop="200dp"
+            android:layout_marginTop="180dp"
             android:textColor="@color/lanse33"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
@@ -34,8 +33,11 @@
             android:textSize="28sp"
             android:layout_marginTop="10dp"
             android:id="@+id/name33"
+            android:gravity="center"
             android:textColor="@color/colorBar_bg"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
             android:layout_height="wrap_content" />
 
 

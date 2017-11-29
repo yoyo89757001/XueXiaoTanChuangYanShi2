@@ -288,7 +288,6 @@ public class VlcVideoActivity extends BaseActivity implements RecytviewCash, Spe
 											e.printStackTrace();
 										}
 
-
 									}
 								}).start();
 
@@ -326,7 +325,6 @@ public class VlcVideoActivity extends BaseActivity implements RecytviewCash, Spe
 										}
 									}).start();
 								}
-
 
 					}
 							break;
@@ -1057,13 +1055,15 @@ public class VlcVideoActivity extends BaseActivity implements RecytviewCash, Spe
 	//学生跟陌生人
 	public  class MyAdapter extends BaseQuickAdapter<TanChuangBean,BaseViewHolder> {
 		private RequestOptions myOptions = null;
-
+		private RequestOptions myOptions2 = null;
 
 		private MyAdapter(int layoutResId, List<TanChuangBean> data) {
 			super(layoutResId, data);
 			 myOptions = new RequestOptions()
 					.circleCrop()
 					.diskCacheStrategy(DiskCacheStrategy.NONE);
+			myOptions2 = new RequestOptions()
+					.circleCrop();
 		}
 
 
@@ -1112,7 +1112,7 @@ public class VlcVideoActivity extends BaseActivity implements RecytviewCash, Spe
 				switch (item.getType()) {
 					case -1:
 						//陌生人
-						toprl.setBackgroundResource(R.drawable.zidonghuoqu8);
+						toprl.setBackgroundResource(R.drawable.ms_bg);
 
 						zhuangtai.setText("陌生人");
 						name.setText("陌生人进入,请保安尽快到现场或短信保安预警.");
@@ -1126,7 +1126,6 @@ public class VlcVideoActivity extends BaseActivity implements RecytviewCash, Spe
 						name.setText(item.getName());
 						zhuangtai.setText(item.getRemark());
 						mSpeechSynthesizer.speak("欢迎"+item.getName()+"祝你出入平安.");
-
 //						String  zt=item.getRemark();
 //						if (zt!=null){
 //							if (zt.equals("")){
@@ -1139,7 +1138,6 @@ public class VlcVideoActivity extends BaseActivity implements RecytviewCash, Spe
 //						}
 
 						break;
-
 					case 1:
 						//访客
 						//toprl.setBackgroundResource(R.drawable.zidonghuoqu15);
@@ -1147,7 +1145,6 @@ public class VlcVideoActivity extends BaseActivity implements RecytviewCash, Spe
 						//richeng.setText("");
 						//name.setText(item.getName());
 						//autoScrollTextView.setText("欢迎你来本公司参观指导。");
-
 						break;
 					case 2:
 						//VIP访客
@@ -1155,7 +1152,6 @@ public class VlcVideoActivity extends BaseActivity implements RecytviewCash, Spe
 						//	richeng.setText("");
 						//	name.setText(item.getName());
 						//autoScrollTextView.setText("欢迎VIP访客 "+item.getName()+" 来本公司指导工作。");
-
 						break;
 				}
 				if (item.getTouxiang()!=null){
@@ -1163,7 +1159,7 @@ public class VlcVideoActivity extends BaseActivity implements RecytviewCash, Spe
 					Glide.with(MyApplication.getAppContext())
 							.load(zhuji+item.getTouxiang())
 							//	.load("http://121.46.3.20/"+item.getTouxiang())
-							.apply(RequestOptions.bitmapTransform(new CircleCrop()))
+							.apply(myOptions2)
 							//.transform(new GlideCircleTransform(MyApplication.getAppContext(),2,Color.parseColor("#ffffffff")))
 							//.transform(new GlideRoundTransform(MyApplication.getAppContext(), 6))
 							.into((ImageView) helper.getView(R.id.touxiang));
